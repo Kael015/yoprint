@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\File;
+use App\Models\DataFile;
 use App\Imports\ProductImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +15,7 @@ class ProductController extends Controller
     public function import() 
     {
         // dispatch(new App\Jobs\ImportFile);
-        $data_file = File::where('status', 'pending')->limit(1)->get();
+        $data_file = DataFile::where('status', 'pending')->limit(1)->get();
         $file_name = $data_file[0]->file_name;
         // Excel::import(new ProductImport, $file_name, 'data_file');
         if ($data_file) {

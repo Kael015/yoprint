@@ -58,7 +58,7 @@
           url:"{{ asset('/upload') }}",
           dataType:'json',
           success: function(data){
-              console.log(data);
+              // console.log(data);
               var table = $('#data_file').DataTable();
               var DataLeads = data;
               table.clear().draw()
@@ -69,13 +69,18 @@
                   if (typeof e.created_at === 'undefined') {
                   e.created_at = "";
                   }
+                  else {
+                    e.created_at = "{{$file->created_at}}";
+                  }
                   if (typeof e.file_name === 'undefined') {
                   e.file_name = "";
                   }
                   
+              // console.log(e.created_at);
+                  date_upload = new Date(e.created_at);
                   table.row.add([
                       index,
-                      e.created_at,
+                      e.created_at+'<br>'+e.passed_time,
                       e.file_name,
                       e.status,
                   

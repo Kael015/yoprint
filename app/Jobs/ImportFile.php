@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Models\File;
+use App\Models\DataFile;
 use App\Imports\ProductImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
@@ -29,7 +29,7 @@ class ImportFile implements ShouldQueue
     {
         //
         $this->file_name = $file_name;
-        $data_file = File::where('file_name', $file_name)->limit(1)->get();
+        $data_file = DataFile::where('file_name', $file_name)->limit(1)->get();
         $this->file_id = $data_file[0]->id;
     }
 
