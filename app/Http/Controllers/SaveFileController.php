@@ -8,10 +8,14 @@ use App\Models\File;
 class SaveFileController extends Controller
 {
     //
-    public function index()
+    public function index(Request $request)
     {
         # code...
         $list_file = File::all();
+        if ($request->ajax()) {
+            $list_file = File::all();
+            return response()->json($list_file);
+        }
         return view(
             'upload',[
             'list_file'=>$list_file,
