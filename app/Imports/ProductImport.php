@@ -7,6 +7,7 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
+use App\Controllers\Encoding;
 
 class ProductImport implements ToModel, WithHeadingRow, WithBatchInserts, WithChunkReading
 {
@@ -21,14 +22,14 @@ class ProductImport implements ToModel, WithHeadingRow, WithBatchInserts, WithCh
         // dd($row[0]);
         $group = Product::firstOrCreate([
             //
-            'UNIQUE_KEY'                => $row['unique_key'],
-            'PRODUCT_TITLE'             => $row['product_title'],
-            'PRODUCT_DESCRIPTION'       => $row['product_description'],
-            'STYLE#'                    => $row['style'],
-            'SANMAR_MAINFRAME_COLOR'    => $row['sanmar_mainframe_color'],
-            'SIZE'                      => $row['size'],
-            'COLOR_NAME'                => $row['color_name'],
-            'PIECE_PRICE'               => $row['piece_price'],
+            'UNIQUE_KEY'                => Encoding::fixUTF8($row['unique_key']),
+            'PRODUCT_TITLE'             => Encoding::fixUTF8($row['product_title']),
+            'PRODUCT_DESCRIPTION'       => Encoding::fixUTF8($row['product_description']),
+            'STYLE#'                    => Encoding::fixUTF8($row['style']),
+            'SANMAR_MAINFRAME_COLOR'    => Encoding::fixUTF8($row['sanmar_mainframe_color']),
+            'SIZE'                      => Encoding::fixUTF8($row['size']),
+            'COLOR_NAME'                => Encoding::fixUTF8($row['color_name']),
+            'PIECE_PRICE'               => Encoding::fixUTF8($row['piece_price']),
         ]);
     }
 
